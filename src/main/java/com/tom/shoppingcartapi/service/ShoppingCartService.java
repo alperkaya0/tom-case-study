@@ -58,14 +58,14 @@ public class ShoppingCartService {
 		if (coupon.getRate() < 0 || (coupon.getType().toLowerCase().equals("rate") && coupon.getRate() < 0.0001)) {
 			throw new BadCouponException("Rate of a coupon of type rate, must be a positive value.");
 		}
-		//Neither amount nor rate can be negative, but the opposite types can be 0.0. To check if zero, since they are double we cannot simply do x == 0.
+		//Neither amount nor rate can be negative, but the opposite types can be 0.0. To check if zero, since they are double, we cannot simply do x == 0.
 		if (coupon.getAmount() < 0 || (coupon.getType().toLowerCase().equals("amount") && coupon.getAmount() < 0.0001)) {
 			throw new BadCouponException("Amount of a coupon of type amount, must be a positive value");
 		}
 	}
 	
 	public void validateItem(Item item) {
-		if (item.getName().trim().equals("")) {
+		if (item.getName() == null) {
 			throw new BadItemException("Item name cannot be empty.");
 		}
 		if (item.getPrice() <= 0) {
@@ -74,14 +74,14 @@ public class ShoppingCartService {
 		if (item.getQuantity() <= 0) {
 			throw new BadItemException("Quantity must be a positive number.");
 		}
-		if (item.getCategory().trim().equals("")) {
+		if (item.getCategory() == null) {
 			throw new BadItemException("Category name cannot be empty.");
 		}
 	}
 	
 	public void validateWholeShoppingCart(ShoppingCart sc) {
 		//Validate prices
-		if (sc.getTotalPrice() <= 0 || sc.getDiscountedPrice() <= 0) {
+		if (sc.getTotalPrice() < 0 || sc.getDiscountedPrice() < 0) {
 			throw new BadShoppingCartException("Price must be a positive number. Incorrect shopping cart.");
 		}
 		//Validate that items have different id
@@ -92,6 +92,7 @@ public class ShoppingCartService {
 			ids.putIfAbsent(item.getId(), 0);
 			ids.put(item.getId(), ids.get(item.getId()) + 1);
 		}
+		//Check if any id occurred more than once
 		for (String key : ids.keySet()) {
 			if (ids.get(key) > 1) {
 				throw new BadShoppingCartException("There are multiple items with the same id. Incorrect shopping cart.");
