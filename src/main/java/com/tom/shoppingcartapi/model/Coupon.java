@@ -2,6 +2,8 @@ package com.tom.shoppingcartapi.model;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,8 @@ public class Coupon {
 	private String id;
 	private double rate;
 	//These below are not going to be used for this case study, but it will serve a purpose later if someone wants to add a coupon that comes with conditions
+	@JsonIgnore //For now ignore them
 	private double lowerLimit = 0;
+	@JsonIgnore //For now ignore them
 	private double upperLimit = Double.MAX_VALUE;
 }

@@ -23,6 +23,7 @@ public class ShoppingCart {
 	private String id;
 	private String customerId;
 	private List<Item> items;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private List<Coupon> coupons;
 	@JsonInclude(JsonInclude.Include.NON_NULL) //with this, you don't have to give totalPrice at POST request, but it will show up at GET request
 	private double totalPrice;

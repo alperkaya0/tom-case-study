@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,8 @@ public class Item {
 	private String name;
 	private double price;
 	private String category;
+	@JsonInclude(JsonInclude.Include.NON_NULL) //with this, you don't have to give totalPrice at POST request, but it will show up at GET request
 	private Date createDate = new Date();
+	@JsonInclude(JsonInclude.Include.NON_NULL) //with this, you don't have to give totalPrice at POST request, but it will show up at GET request
 	private Date changeDate = new Date();
 }

@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 public class ShoppingCartController {
 	private final ShoppingCartService shoppingCartService;
 	
+	//End-points
 	@GetMapping
 	public ResponseEntity<List<ShoppingCart>> getShoppingCarts() {
 		return new ResponseEntity<>(shoppingCartService.getShoppingCarts(), HttpStatus.OK);

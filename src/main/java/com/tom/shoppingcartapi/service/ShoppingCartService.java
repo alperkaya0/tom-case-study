@@ -1,7 +1,8 @@
 package com.tom.shoppingcartapi.service;
+
 import java.util.List;
 import java.util.Optional;
-
+import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 import com.tom.shoppingcartapi.repository.ShoppingCartRepository;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
@@ -35,11 +36,13 @@ public class ShoppingCartService {
 		shoppingCart.setTotalPrice(sum);
 		//Discounted price will be calculated from coupons list
 		List<Coupon> cp = shoppingCart.getCoupons();
-		for (int i = 0; i < cp.size(); ++i) {
+		for (int i = 0; i < (cp == null ? 0 : cp.size()); ++i) {//notice the ternary operation inside for loop. It is there because client can totally ignore coupons list, can send an empty array, can send a non-empty array. If we don't use ternary operator here, then first scenario will cause an error because cp will be null, null.size() doesn't mean anything.
 			if (sum > cp.get(i).getLowerLimit() && sum < cp.get(i).getUpperLimit()) {
 				sum = sum - (sum * cp.get(i).getRate());
 			}
 		}
+		// If client didn't send even an empty array as "coupons", then we will initiate a new List, ArrayList is a type of List. We cannot use List because it is not a class, it is an interface
+		if (cp == null) shoppingCart.setCoupons(new ArrayList<Coupon>());
 		shoppingCart.setDiscountedPrice(sum);
 		return shoppingCartRepository.save(shoppingCart);
 	}
