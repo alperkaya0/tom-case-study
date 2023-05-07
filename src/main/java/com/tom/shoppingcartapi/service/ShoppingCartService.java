@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 import com.tom.shoppingcartapi.repository.ShoppingCartRepository;
+import com.tom.shoppingcartapi.exception.ItemNotFoundException;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
 import com.tom.shoppingcartapi.model.Coupon;
@@ -55,5 +56,25 @@ public class ShoppingCartService {
 		}
 		
 		return sC.get().getItems();
+	}
+
+	public void deleteItem(String id, String itemId) {
+		Optional<ShoppingCart> sC = shoppingCartRepository.findById(id);
+		if (!sC.isPresent()) {
+			throw new ShoppingCartNotFoundException("There is no ShoppingCart with that id.");
+		}
+		
+		boolean contains = false;
+		for (Item i : sC.get().getItems()) {
+			if (i.getId().equals(itemId)) {
+				contains = true;
+				sC.get().getItems().remove(i);
+				break;
+			}
+		}
+		
+		if (!contains) {
+			throw new ItemNotFoundException("There is no ShoppingCart with that id.");
+		}
 	}
 }

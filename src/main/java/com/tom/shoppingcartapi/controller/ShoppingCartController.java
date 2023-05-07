@@ -3,6 +3,7 @@ package com.tom.shoppingcartapi.controller;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +39,12 @@ public class ShoppingCartController {
 	@PostMapping
 	public ResponseEntity<ShoppingCart> addNewShoppingCart(@RequestBody ShoppingCart shoppingCart) {
 		return new ResponseEntity<>(shoppingCartService.createNewShoppingCart(shoppingCart), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}/items/{itemId}")
+	public ResponseEntity<Void> deleteItemInShoppingCart(@PathVariable String id, @PathVariable String itemId) {
+		shoppingCartService.deleteItem(id, itemId);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	
