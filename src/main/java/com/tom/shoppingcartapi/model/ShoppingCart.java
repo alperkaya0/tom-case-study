@@ -18,7 +18,7 @@ public class ShoppingCart {
 	   - Total price
 	   - Discounted price
 	   - Coupons(so that we can calculate discounted price) 
-	   -*/
+	*/
 	@Id
 	private String id;
 	private String customerId;
