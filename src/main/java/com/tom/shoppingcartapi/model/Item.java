@@ -23,7 +23,7 @@ public class Item {
 	@Id
 	private String id;
 	private String name;
-	private int price;
+	private double price;
 	private String category;
 	private Date createDate = new Date();
 	private Date changeDate = new Date();
