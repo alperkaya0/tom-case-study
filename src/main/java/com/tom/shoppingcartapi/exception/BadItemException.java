@@ -1,12 +1,12 @@
 package com.tom.shoppingcartapi.exception;
 
-public class ShoppingCartNotFoundException extends RuntimeException {
+public class BadItemException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public ShoppingCartNotFoundException(String message) {
+	public BadItemException(String message) {
 		super(message);
 	}
 }
