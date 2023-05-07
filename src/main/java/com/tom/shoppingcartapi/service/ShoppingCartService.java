@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 import com.tom.shoppingcartapi.repository.ShoppingCartRepository;
+import com.tom.shoppingcartapi.exception.BadCouponException;
 import com.tom.shoppingcartapi.exception.ItemNotFoundException;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
@@ -32,11 +33,17 @@ public class ShoppingCartService {
 			sum += it.get(i).getPrice();
 		}
 		shoppingCart.setTotalPrice(sum);
-		//Discounted price will be calculated from coupons list
+		//Discounted price will be calculated with the help of coupons list
 		List<Coupon> cp = shoppingCart.getCoupons();
 		for (int i = 0; i < (cp == null ? 0 : cp.size()); ++i) {//notice the ternary operation inside for loop. It is there because client can totally ignore coupons list, can send an empty array, can send a non-empty array. If we don't use ternary operator here, then first scenario will cause an error because cp will be null, null.size() doesn't mean anything.
 			if (sum > cp.get(i).getLowerLimit() && sum < cp.get(i).getUpperLimit()) {
-				sum = sum - (sum * cp.get(i).getRate());
+				if (cp.get(i).getType().toLowerCase().equals("rate")) {
+					sum = sum - (sum * cp.get(i).getRate());
+				} else if (cp.get(i).getType().toLowerCase().equals("amount")) {
+					sum = sum - (cp.get(i).getAmount());
+				} else {
+					throw new BadCouponException("Coupon type is wrong, therefore provided coupon is incorrect.");
+				}
 			}
 		}
 		shoppingCart.setDiscountedPrice(sum);
@@ -69,18 +76,15 @@ public class ShoppingCartService {
     }
 	
 	public void deleteItem(String id, String itemId) {
-		Optional<ShoppingCart> sC = shoppingCartRepository.findById(id);
-		if (!sC.isPresent()) {
-			throw new ShoppingCartNotFoundException("There is no ShoppingCart with that id.");
-		}
+		ShoppingCart temp = getShoppingCartById(id);
 		
 		boolean contains = false;
-		for (Item i : sC.get().getItems()) {
+		for (Item i : temp.getItems()) {
 			if (i.getId().equals(itemId)) {
 				contains = true;
 				
 				//re-calculate prices
-				ShoppingCart temp = getShoppingCartById(id);
+				
 				temp = calculatePrices(temp);
 				
 				//delete the item
@@ -95,5 +99,20 @@ public class ShoppingCartService {
 		if (!contains) {
 			throw new ItemNotFoundException("There is no Item with that id.");
 		}
+	}
+
+	public List<Coupon> applyCoupon(String id, Coupon coupon) {
+		ShoppingCart sC = getShoppingCartById(id);
+		
+		//append coupon to the list of coupons of the specific shopping cart
+		sC.getCoupons().add(coupon);
+		
+		//re-calculate prices because coupons will affect them
+		sC = calculatePrices(sC);
+		
+		//overwrite the old shopping cart
+		shoppingCartRepository.save(sC);
+		
+		return sC.getCoupons();
 	}
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tom.shoppingcartapi.exception.ItemNotFoundException;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
+import com.tom.shoppingcartapi.model.Coupon;
 import com.tom.shoppingcartapi.model.Item;
 import com.tom.shoppingcartapi.model.ShoppingCart;
 import com.tom.shoppingcartapi.service.ShoppingCartService;
@@ -22,7 +23,7 @@ import com.tom.shoppingcartapi.service.ShoppingCartService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/shopping-carts")
+@RequestMapping("/v1/shopping-carts")
 @AllArgsConstructor
 public class ShoppingCartController {
 	private final ShoppingCartService shoppingCartService;
@@ -40,7 +41,12 @@ public class ShoppingCartController {
 	
 	@PostMapping
 	public ResponseEntity<ShoppingCart> addNewShoppingCart(@RequestBody ShoppingCart shoppingCart) {
-		return new ResponseEntity<>(shoppingCartService.createNewShoppingCart(shoppingCart), HttpStatus.OK);
+		return new ResponseEntity<>(shoppingCartService.createNewShoppingCart(shoppingCart), HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/{id}/coupons")
+	public ResponseEntity<List<Coupon>> applyCouponToShoppingCart(@PathVariable String id, @RequestBody Coupon coupon) {
+		return new ResponseEntity<>(shoppingCartService.applyCoupon(id, coupon), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}/items/{itemId}")

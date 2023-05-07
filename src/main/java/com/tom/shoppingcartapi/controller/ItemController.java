@@ -6,7 +6,7 @@ import com.tom.shoppingcartapi.service.ItemService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/v1/items")
 @AllArgsConstructor
 public class ItemController {
 	private final ItemService itemService;

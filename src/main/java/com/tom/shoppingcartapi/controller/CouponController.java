@@ -6,7 +6,7 @@ import com.tom.shoppingcartapi.service.CouponService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/coupons")
+@RequestMapping("/v1/coupons")
 @AllArgsConstructor
 public class CouponController {
 	private final CouponService couponService;
