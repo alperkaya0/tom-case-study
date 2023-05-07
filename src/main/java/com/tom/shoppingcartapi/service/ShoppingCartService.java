@@ -52,6 +52,7 @@ public class ShoppingCartService {
 		if (coupon.getType() == null) {
 			throw new BadCouponException("Type of a coupon cannot be neither empty nor null.");
 		}
+		//type cannot be null because of the function above, because of that there is no need to check if it's null or not
 		if (!(coupon.getType().toLowerCase().equals("rate") || coupon.getType().toLowerCase().equals("amount"))) {
 			throw new BadCouponException("Type of a coupon must be either 'rate' or 'amount'.");
 		}
@@ -213,6 +214,9 @@ public class ShoppingCartService {
 		//append coupon to the list of coupons of the specific shopping cart
 		sC.getCoupons().add(coupon);
 		
+		//validate whole shopping cart, as long as we don't save, it is safe to change sC
+		validateWholeShoppingCart(sC);
+		
 		//re-calculate prices because coupons will affect them
 		sC = calculatePrices(sC);
 		
@@ -230,6 +234,9 @@ public class ShoppingCartService {
 		
 		//Add item to the List<Item>
 		sC.getItems().add(item);
+		
+		//Validate whole shopping cart, as long as we don't save, it is safe to change sC
+		validateWholeShoppingCart(sC);
 		
 		//re-calculate prices because new items will affect them
 		sC = calculatePrices(sC);
