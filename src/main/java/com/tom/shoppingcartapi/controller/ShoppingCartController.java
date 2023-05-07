@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tom.shoppingcartapi.exception.BadCouponException;
+import com.tom.shoppingcartapi.exception.BadItemException;
+import com.tom.shoppingcartapi.exception.BadShoppingCartException;
+import com.tom.shoppingcartapi.exception.CouponAlreadyPresentException;
+import com.tom.shoppingcartapi.exception.ItemAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ItemNotFoundException;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
@@ -62,14 +67,14 @@ public class ShoppingCartController {
 	
 	
 	//Exception Handlers
-	@ExceptionHandler({ShoppingCartAlreadyPresentException.class})
-	public ResponseEntity<String> handleAlreadyPresentException(ShoppingCartAlreadyPresentException e) {
-		return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-	}
-	
 	@ExceptionHandler({ShoppingCartNotFoundException.class})
 	public ResponseEntity<String> handleShoppingCartNotFoundException(ShoppingCartNotFoundException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler({ShoppingCartAlreadyPresentException.class})
+	public ResponseEntity<String> handleAlreadyPresentException(ShoppingCartAlreadyPresentException e) {
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
 	}
 	
 	@ExceptionHandler({ItemNotFoundException.class})
@@ -77,5 +82,28 @@ public class ShoppingCartController {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
 	
-	
+	@ExceptionHandler({ItemAlreadyPresentException.class})
+	public ResponseEntity<String> handleItemAlreadyPresentException(ItemAlreadyPresentException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+	}
+
+	@ExceptionHandler({CouponAlreadyPresentException.class})
+	public ResponseEntity<String> handleCouponAlreadyPresentException(CouponAlreadyPresentException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+	}
+
+	@ExceptionHandler({BadShoppingCartException.class})
+	public ResponseEntity<String> handleBadShoppingCartException(BadShoppingCartException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler({BadItemException.class})
+	public ResponseEntity<String> handleBadItemException(BadItemException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler({BadCouponException.class})
+	public ResponseEntity<String> handleBadCouponException(BadCouponException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
 }

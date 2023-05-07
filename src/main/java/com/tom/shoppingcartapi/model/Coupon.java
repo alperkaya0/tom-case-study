@@ -21,6 +21,7 @@ public class Coupon {
 	    */
 	@Id
 	private String id;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String type;
 	@JsonInclude(JsonInclude.Include.NON_NULL)//This means it will be ignored if client doesn't provide a value
 	private double rate;

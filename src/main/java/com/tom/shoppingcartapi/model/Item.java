@@ -26,6 +26,7 @@ public class Item {
 	private String id;
 	private String name;
 	private double price;
+	private int quantity;
 	private String category;
 	@JsonInclude(JsonInclude.Include.NON_NULL) //with this, you don't have to give totalPrice at POST request, but it will show up at GET request
 	private Date createDate = new Date();
