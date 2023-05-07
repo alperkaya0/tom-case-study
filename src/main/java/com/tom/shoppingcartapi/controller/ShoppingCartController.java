@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.tom.shoppingcartapi.exception.ItemNotFoundException;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
 import com.tom.shoppingcartapi.model.Item;
@@ -50,7 +52,7 @@ public class ShoppingCartController {
 	
 	//Exception Handlers
 	@ExceptionHandler({ShoppingCartAlreadyPresentException.class})
-	public ResponseEntity<String> handleShoppingCartAlreadyPresentException(ShoppingCartAlreadyPresentException e) {
+	public ResponseEntity<String> handleAlreadyPresentException(ShoppingCartAlreadyPresentException e) {
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
 	}
 	
@@ -58,4 +60,11 @@ public class ShoppingCartController {
 	public ResponseEntity<String> handleShoppingCartNotFoundException(ShoppingCartNotFoundException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler({ItemNotFoundException.class})
+	public ResponseEntity<String> handleItemNotFoundException(ItemNotFoundException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+	}
+	
+	
 }

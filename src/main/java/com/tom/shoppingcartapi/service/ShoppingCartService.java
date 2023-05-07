@@ -24,11 +24,7 @@ public class ShoppingCartService {
 		return shoppingCartRepository.findAll();
 	}
 
-	public ShoppingCart createNewShoppingCart(ShoppingCart shoppingCart) {
-		Optional<ShoppingCart> sCById = shoppingCartRepository.findByCustomerId(shoppingCart.getCustomerId());
-		if (sCById.isPresent()) {
-			throw new ShoppingCartAlreadyPresentException("Customer already has a shopping cart. You may want to update it or delete then recreate it.");
-		}
+	public ShoppingCart calculatePrices(ShoppingCart shoppingCart) {
 		//Total price will be calculated from items list
 		double sum = 0;
 		List<Item> it = shoppingCart.getItems();
@@ -43,9 +39,18 @@ public class ShoppingCartService {
 				sum = sum - (sum * cp.get(i).getRate());
 			}
 		}
-		// If client didn't send even an empty array as "coupons", then we will initiate a new List, ArrayList is a type of List. We cannot use List because it is not a class, it is an interface
-		if (cp == null) shoppingCart.setCoupons(new ArrayList<Coupon>());
 		shoppingCart.setDiscountedPrice(sum);
+		return shoppingCart;
+	}
+	
+	public ShoppingCart createNewShoppingCart(ShoppingCart shoppingCart) {
+		Optional<ShoppingCart> sCById = shoppingCartRepository.findByCustomerId(shoppingCart.getCustomerId());
+		if (sCById.isPresent()) {
+			throw new ShoppingCartAlreadyPresentException("Customer already has a shopping cart. You may want to update it or delete then recreate it.");
+		}
+		shoppingCart = calculatePrices(shoppingCart);
+		// If client didn't send even an empty array as "coupons", then we will initiate a new List, ArrayList is a type of List. We cannot use List because it is not a class, it is an interface
+		if (shoppingCart.getCoupons() == null) shoppingCart.setCoupons(new ArrayList<Coupon>());
 		return shoppingCartRepository.save(shoppingCart);
 	}
 
@@ -58,6 +63,11 @@ public class ShoppingCartService {
 		return sC.get().getItems();
 	}
 
+	public ShoppingCart getShoppingCartById(String id) {
+        return shoppingCartRepository.findById(id)
+            .orElseThrow(() -> new ShoppingCartNotFoundException("There is no ShoppingCart with that id: " + id));
+    }
+	
 	public void deleteItem(String id, String itemId) {
 		Optional<ShoppingCart> sC = shoppingCartRepository.findById(id);
 		if (!sC.isPresent()) {
@@ -68,13 +78,22 @@ public class ShoppingCartService {
 		for (Item i : sC.get().getItems()) {
 			if (i.getId().equals(itemId)) {
 				contains = true;
-				sC.get().getItems().remove(i);
+				
+				//re-calculate prices
+				ShoppingCart temp = getShoppingCartById(id);
+				temp = calculatePrices(temp);
+				
+				//delete the item
+				temp.getItems().remove(i);
+				
+				//overwrite the old object
+				shoppingCartRepository.save(temp);
 				break;
 			}
 		}
 		
 		if (!contains) {
-			throw new ItemNotFoundException("There is no ShoppingCart with that id.");
+			throw new ItemNotFoundException("There is no Item with that id.");
 		}
 	}
 }
