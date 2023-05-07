@@ -22,7 +22,7 @@ public class ShoppingCartService {
 	public ShoppingCart createNewShoppingCart(ShoppingCart shoppingCart) {
 		Optional<ShoppingCart> sCById = shoppingCartRepository.findByCustomerId(shoppingCart.getCustomerId());
 		if (sCById.isPresent()) {
-			throw new ShoppingCartAlreadyPresentException("Customer has already a shopping cart. You may want to update it or delete then recreate it.");
+			throw new ShoppingCartAlreadyPresentException("Customer already has a shopping cart. You may want to update it or delete then recreate it.");
 		}
 		
 		return shoppingCartRepository.save(shoppingCart);

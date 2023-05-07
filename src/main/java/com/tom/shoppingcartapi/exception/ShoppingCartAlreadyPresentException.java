@@ -1,6 +1,6 @@
 package com.tom.shoppingcartapi.exception;
 
-public class ShoppingCartAlreadyPresentException extends Exception {
+public class ShoppingCartAlreadyPresentException extends RuntimeException {
 	/**
 	 * 
 	 */
