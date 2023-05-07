@@ -1,0 +1,23 @@
+package com.tom.shoppingcartapi.controller;
+
+import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.tom.shoppingcartapi.model.ShoppingCart;
+import com.tom.shoppingcartapi.service.ShoppingCartService;
+import lombok.AllArgsConstructor;
+
+@RestController
+@RequestMapping("/shopping-carts")
+@AllArgsConstructor
+public class ShoppingCartController {
+	private final ShoppingCartService shoppingCartService;
+	
+	@GetMapping
+	public ResponseEntity<List<ShoppingCart>> getShoppingCarts() {
+		return new ResponseEntity<>(shoppingCartService.getShoppingCarts(), HttpStatus.OK);
+	}
+}
