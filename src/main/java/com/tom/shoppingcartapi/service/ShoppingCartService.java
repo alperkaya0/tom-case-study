@@ -84,7 +84,6 @@ public class ShoppingCartService {
 				contains = true;
 				
 				//re-calculate prices
-				
 				temp = calculatePrices(temp);
 				
 				//delete the item
@@ -114,5 +113,22 @@ public class ShoppingCartService {
 		shoppingCartRepository.save(sC);
 		
 		return sC.getCoupons();
+	}
+
+	public List<Item> addNewItemToShoppingCart(String id, Item item) {
+		ShoppingCart sC = getShoppingCartById(id);
+		
+		//Validate that item has correct structure!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		//Add item to the List<Item>
+		sC.getItems().add(item);
+		
+		//re-calculate prices because new items will affect them
+		sC = calculatePrices(sC);
+		
+		//Overwrite the old object
+		shoppingCartRepository.save(sC);
+		
+		return sC.getItems();
 	}
 }

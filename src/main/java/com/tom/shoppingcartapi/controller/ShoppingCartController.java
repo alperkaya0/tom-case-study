@@ -44,6 +44,11 @@ public class ShoppingCartController {
 		return new ResponseEntity<>(shoppingCartService.createNewShoppingCart(shoppingCart), HttpStatus.CREATED);
 	}
 	
+	@PostMapping("/{id}/items")
+	public ResponseEntity<List<Item>> addNewItemToShoppingCart(@PathVariable String id, @RequestBody Item item) {
+		return new ResponseEntity<>(shoppingCartService.addNewItemToShoppingCart(id, item), HttpStatus.CREATED);
+	}
+	
 	@PostMapping("/{id}/coupons")
 	public ResponseEntity<List<Coupon>> applyCouponToShoppingCart(@PathVariable String id, @RequestBody Coupon coupon) {
 		return new ResponseEntity<>(shoppingCartService.applyCoupon(id, coupon), HttpStatus.OK);
