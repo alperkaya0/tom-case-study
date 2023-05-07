@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.tom.shoppingcartapi.model.ShoppingCart;
@@ -19,5 +21,9 @@ public class ShoppingCartController {
 	@GetMapping
 	public ResponseEntity<List<ShoppingCart>> getShoppingCarts() {
 		return new ResponseEntity<>(shoppingCartService.getShoppingCarts(), HttpStatus.OK);
+	}
+	@PostMapping
+	public ResponseEntity<ShoppingCart> addNewShoppingCart(@RequestBody ShoppingCart shoppingCart) {
+		return new ResponseEntity<>(shoppingCartService.createNewShoppingCart(shoppingCart), HttpStatus.OK);
 	}
 }

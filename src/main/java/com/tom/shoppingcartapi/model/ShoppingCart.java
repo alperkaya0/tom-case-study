@@ -19,6 +19,7 @@ public class ShoppingCart {
 	   -*/
 	@Id
 	private String id;
+	private String customerId;
 	private List<Item> items;
 	private List<Coupon> coupons;
 	private int totalPrice;
