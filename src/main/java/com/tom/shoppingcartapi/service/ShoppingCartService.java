@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 import com.tom.shoppingcartapi.repository.ShoppingCartRepository;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
+import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
 import com.tom.shoppingcartapi.model.Coupon;
 import com.tom.shoppingcartapi.model.Item;
 import com.tom.shoppingcartapi.model.ShoppingCart;
@@ -45,5 +46,14 @@ public class ShoppingCartService {
 		if (cp == null) shoppingCart.setCoupons(new ArrayList<Coupon>());
 		shoppingCart.setDiscountedPrice(sum);
 		return shoppingCartRepository.save(shoppingCart);
+	}
+
+	public List<Item> getItems(String id) {
+		Optional<ShoppingCart> sC = shoppingCartRepository.findById(id);
+		if (!sC.isPresent()) {
+			throw new ShoppingCartNotFoundException("There is no ShoppingCart with that id.");
+		}
+		
+		return sC.get().getItems();
 	}
 }
