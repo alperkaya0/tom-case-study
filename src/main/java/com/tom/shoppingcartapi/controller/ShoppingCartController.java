@@ -34,11 +34,13 @@ public class ShoppingCartController {
 	private final ShoppingCartService shoppingCartService;
 	
 	//End-points
+	//User can see the original price and discount price(by looking at totalPrice and discountedPrice attributes)
 	@GetMapping
 	public ResponseEntity<List<ShoppingCart>> getShoppingCarts() {
 		return new ResponseEntity<>(shoppingCartService.getShoppingCarts(), HttpStatus.OK);
 	}
 	
+	//User can list all items in the shopping cart
 	@GetMapping("/{id}/items")
 	public ResponseEntity<List<Item>> getAllItemsInShoppingCart(@PathVariable String id) {
 		return new ResponseEntity<List<Item>>(shoppingCartService.getItems(id), HttpStatus.OK);
@@ -49,16 +51,19 @@ public class ShoppingCartController {
 		return new ResponseEntity<>(shoppingCartService.createNewShoppingCart(shoppingCart), HttpStatus.CREATED);
 	}
 	
+	//User can add a new item to shopping cart
 	@PostMapping("/{id}/items")
 	public ResponseEntity<List<Item>> addNewItemToShoppingCart(@PathVariable String id, @RequestBody Item item) {
 		return new ResponseEntity<>(shoppingCartService.addNewItemToShoppingCart(id, item), HttpStatus.CREATED);
 	}
 	
+	//User can apply a coupon to shopping cart
 	@PostMapping("/{id}/coupons")
 	public ResponseEntity<List<Coupon>> applyCouponToShoppingCart(@PathVariable String id, @RequestBody Coupon coupon) {
-		return new ResponseEntity<>(shoppingCartService.applyCoupon(id, coupon), HttpStatus.OK);
+		return new ResponseEntity<>(shoppingCartService.applyCoupon(id, coupon), HttpStatus.CREATED);
 	}
 	
+	//User can remove an existing item from shopping cart
 	@DeleteMapping("/{id}/items/{itemId}")
 	public ResponseEntity<Void> deleteItemInShoppingCart(@PathVariable String id, @PathVariable String itemId) {
 		shoppingCartService.deleteItem(id, itemId);

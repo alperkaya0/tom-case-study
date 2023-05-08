@@ -25,7 +25,7 @@ public class ShoppingCartService {
 	private final ShoppingCartRepository shoppingCartRepository;
 
 	public List<ShoppingCart> getShoppingCarts() {
-		return shoppingCartRepository.findAll();
+		return shoppingCartRepository.findAll(); 
 	}
 	
 	//Because coupons are out of assignment, I will use this function to use my hard-coded coupons
@@ -56,12 +56,17 @@ public class ShoppingCartService {
 		if (!(coupon.getType().toLowerCase().equals("rate") || coupon.getType().toLowerCase().equals("amount"))) {
 			throw new BadCouponException("Type of a coupon must be either 'rate' or 'amount'.");
 		}
-		if (coupon.getRate() < 0 || (coupon.getType().toLowerCase().equals("rate") && coupon.getRate() < 0.0001)) {
-			throw new BadCouponException("Rate of a coupon of type rate, must be a positive value.");
+		if (coupon.getRate() < 0 || (coupon.getType().toLowerCase().equals("rate") && (coupon.getRate() == 0) ||  coupon.getRate() > 1 )) {
+			throw new BadCouponException("Rate of a coupon of type rate, must be a positive value between 0 and 1.");
 		}
-		//Neither amount nor rate can be negative, but the opposite types can be 0.0. To check if zero, since they are double, we cannot simply do x == 0.
-		if (coupon.getAmount() < 0 || (coupon.getType().toLowerCase().equals("amount") && coupon.getAmount() < 0.0001)) {
-			throw new BadCouponException("Amount of a coupon of type amount, must be a positive value");
+		if (coupon.getAmount() < 0 || (coupon.getType().toLowerCase().equals("amount") && coupon.getAmount() == 0)) {
+			throw new BadCouponException("Amount of a coupon of type amount, must be a positive value.");
+		}
+		if (coupon.getType().toLowerCase().equals("rate") && coupon.getAmount() != 0) {
+			throw new BadCouponException("Amount of, a coupon of type rate must be zero.");
+		}
+		if (coupon.getType().toLowerCase().equals("amount") && coupon.getRate() != 0) {
+			throw new BadCouponException("Rate of, a coupon of type amount must be zero.");
 		}
 	}
 	
@@ -176,7 +181,7 @@ public class ShoppingCartService {
 
 	public ShoppingCart getShoppingCartById(String id) {
         return shoppingCartRepository.findById(id)
-            .orElseThrow(() -> new ShoppingCartNotFoundException("There is no ShoppingCart with that id: " + id));
+            .orElseThrow(() -> new ShoppingCartNotFoundException("There is no ShoppingCart with that id."));
     }
 	
 	public void deleteItem(String id, String itemId) {
