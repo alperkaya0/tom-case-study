@@ -17,6 +17,8 @@ No body.
 | ----------- | ----------- |
 | 200 | Success |
 
+---
+
 ## Get a shopping cart by id - ("/v1/shopping-carts/{id}")
 This endpoint returns a ShoppingCart object that id={id}.
 ### Request Type
@@ -31,6 +33,8 @@ No body.
 | 200 | Success |
 | 404 | ShoppingCartNotFoundException |
 
+---
+
 ## Get items in a shopping cart - ("/v1/shopping-carts/{id}/items")
 This endpoint returns a list of Items in a shopping cart that id={id};
 ### Request Type
@@ -44,6 +48,8 @@ No body.
 | ----------- | ----------- |
 | 200 | Success |
 | 404 | ShoppingCartNotFoundException |
+
+---
 
 ## Create new shopping cart - ("/v1/shopping-carts")
 This endpoint creates the given shopping card and returns it back to the client
