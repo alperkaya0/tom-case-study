@@ -167,9 +167,13 @@ public class ShoppingCartService {
 	}
 	
 	public ShoppingCart createNewShoppingCart(ShoppingCart shoppingCart) {
-		Optional<ShoppingCart> sCById = shoppingCartRepository.findByCustomerId(shoppingCart.getCustomerId());
-		if (sCById.isPresent()) {
+		Optional<ShoppingCart> sCByCustomerId = shoppingCartRepository.findByCustomerId(shoppingCart.getCustomerId());
+		if (sCByCustomerId.isPresent()) {
 			throw new ShoppingCartAlreadyPresentException("Customer already has a shopping cart. You may want to update it or delete then recreate it.");
+		}
+		Optional<ShoppingCart> scById = shoppingCartRepository.findById(shoppingCart.getId());
+		if (scById.isPresent()) {
+			throw new ShoppingCartAlreadyPresentException("ShoppingCart with that id already present. You may want to update it or delete then recreate it.");
 		}
 		// If client didn't send even an empty array as "coupons", then we will initiate a new List, ArrayList is a type of List. We cannot use List because it is not a class, it is an interface
 		if (shoppingCart.getCoupons() == null) shoppingCart.setCoupons(new ArrayList<Coupon>());

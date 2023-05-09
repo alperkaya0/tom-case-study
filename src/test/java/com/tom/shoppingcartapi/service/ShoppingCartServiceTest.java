@@ -930,6 +930,52 @@ public class ShoppingCartServiceTest {
 		assertEquals("Customer already has a shopping cart. You may want to update it or delete then recreate it.", e.getMessage());
 	}
 
+
+	@Test
+	@DisplayName("Negative test of createNewShoppingCart, shopping cart already exists")
+	public void createNewShoppingCartButShoppingCartAlreadyExists2ThrowException() {
+		ShoppingCart sc = new ShoppingCart();
+		
+		Item item1 = new Item();
+		item1.setCategory("Sports");
+		item1.setId("1");
+		item1.setName("El Yayı - 200 Lbs");
+		item1.setPrice(190);
+		item1.setQuantity(2);
+		
+		Item item2 = new Item();
+		item2.setCategory("Technology");
+		item2.setId("2");
+		item2.setName("Kindle PaperWhite 4");
+		item2.setPrice(3400);
+		item2.setQuantity(1);
+		
+		Coupon coupon1 = new Coupon();
+		coupon1.setAmount(100);
+		coupon1.setId("1");
+		coupon1.setRate(0);
+		coupon1.setType("amount");
+
+		Coupon coupon2 = new Coupon();
+		coupon2.setAmount(0);
+		coupon2.setId("2");
+		coupon2.setRate(0.2);
+		coupon2.setType("rate");
+		
+		sc.setCoupons(List.of(coupon1, coupon2));
+		sc.setCustomerId("customer1");
+		sc.setId("649821aafff");
+		sc.setItems(List.of(item1, item2));
+		
+		when(shoppingCartRepository.findById(sc.getId())).thenReturn(Optional.of(sc));
+		
+		ShoppingCartAlreadyPresentException e = assertThrows(ShoppingCartAlreadyPresentException.class, () -> {
+			shoppingCartService.createNewShoppingCart(sc);
+		});
+		
+		assertEquals("ShoppingCart with that id already present. You may want to update it or delete then recreate it.", e.getMessage());
+	}
+	
 	@Test
 	@DisplayName("Negative test for createNewShoppingCart, coupon list is null")
 	public void createNewShoppingCartButCouponListIsNull() {
