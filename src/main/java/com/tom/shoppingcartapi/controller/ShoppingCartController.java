@@ -41,6 +41,11 @@ public class ShoppingCartController {
 		return new ResponseEntity<>(shoppingCartService.getShoppingCarts(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<ShoppingCart> getShoppingCartById(@PathVariable String id) {
+		return new ResponseEntity<>(shoppingCartService.getShoppingCartById(id), HttpStatus.OK);
+	}
+	
 	//User can list all items in the shopping cart
 	@GetMapping("/{id}/items")
 	public ResponseEntity<List<Item>> getAllItemsInShoppingCart(@PathVariable String id) {
@@ -60,7 +65,7 @@ public class ShoppingCartController {
 	
 	//User can apply a coupon to shopping cart
 	@PostMapping("/{id}/coupons")
-	public ResponseEntity<List<Coupon>> applyCouponToShoppingCart(@PathVariable String id, @RequestBody Coupon coupon) {
+	public ResponseEntity<Coupon> applyCouponToShoppingCart(@PathVariable String id, @RequestBody Coupon coupon) {
 		return new ResponseEntity<>(shoppingCartService.applyCoupon(id, coupon), HttpStatus.CREATED);
 	}
 	

@@ -137,8 +137,27 @@ public class ShoppingCartServiceTest {
 		item.setName("El Yayı");
 		item.setPrice(100.3);
 		item.setQuantity(1);
+		item.setUrl("");
 		
 		shoppingCartService.validateItem(item);
+	}
+	
+	@Test
+	@DisplayName("Negative test of validateItem, url is null")
+	public void validateItemUrlThrowsException() {
+		Item item = new Item();
+		item.setId("1");
+		item.setCategory("Sports");
+		item.setName("El Yayı");
+		item.setPrice(100.3);
+		item.setQuantity(1);
+		//u.r.l. is not assigned
+		
+		BadItemException e = assertThrows(BadItemException.class, () -> {
+			shoppingCartService.validateItem(item);
+		});
+		
+		assertEquals("Item url cannot be empty.", e.getMessage());
 	}
 	
 	@Test
@@ -149,6 +168,7 @@ public class ShoppingCartServiceTest {
 		item.setCategory("Sports");
 		item.setPrice(100.3);
 		item.setQuantity(1);
+		item.setUrl("");
 		
 		BadItemException e = assertThrows(BadItemException.class, () -> {
 			shoppingCartService.validateItem(item);
@@ -166,6 +186,7 @@ public class ShoppingCartServiceTest {
 		item.setName("El Yayı");
 		item.setPrice(0);
 		item.setQuantity(1);
+		item.setUrl("");
 		
 		BadItemException e = assertThrows(BadItemException.class, () -> {
 			shoppingCartService.validateItem(item);
@@ -183,6 +204,7 @@ public class ShoppingCartServiceTest {
 		item.setName("El Yayı");
 		item.setPrice(-1);
 		item.setQuantity(1);
+		item.setUrl("example url");
 		
 		BadItemException e = assertThrows(BadItemException.class, () -> {
 			shoppingCartService.validateItem(item);
@@ -201,6 +223,7 @@ public class ShoppingCartServiceTest {
 		item.setName("El Yayı");
 		item.setPrice(100.3);
 		item.setQuantity(0);
+		item.setUrl("");
 		
 		BadItemException e = assertThrows(BadItemException.class, () -> {
 			shoppingCartService.validateItem(item);
@@ -218,6 +241,7 @@ public class ShoppingCartServiceTest {
 		item.setName("El Yayı");
 		item.setPrice(100.3);
 		item.setQuantity(-1);
+		item.setUrl("");
 		
 		BadItemException e = assertThrows(BadItemException.class, () -> {
 			shoppingCartService.validateItem(item);
@@ -234,6 +258,7 @@ public class ShoppingCartServiceTest {
 		item.setName("El Yayı");
 		item.setPrice(100.3);
 		item.setQuantity(1);
+		item.setUrl("example url");
 		
 		BadItemException e = assertThrows(BadItemException.class, () -> {
 			shoppingCartService.validateItem(item);
@@ -511,6 +536,7 @@ public class ShoppingCartServiceTest {
 		item1.setName("El Yayı - 200 Lbs");
 		item1.setPrice(190);
 		item1.setQuantity(2);
+		item1.setUrl("");
 		
 		Item item2 = new Item();
 		item2.setCategory("Technology");
@@ -518,6 +544,7 @@ public class ShoppingCartServiceTest {
 		item2.setName("Kindle PaperWhite 4");
 		item2.setPrice(3400);
 		item2.setQuantity(1);
+		item2.setUrl("");
 		
 		Coupon coupon1 = new Coupon();
 		coupon1.setAmount(100);
@@ -584,6 +611,7 @@ public class ShoppingCartServiceTest {
 		item1.setName("El Yayı - 200 Lbs");
 		item1.setPrice(190);
 		item1.setQuantity(2);
+		item1.setUrl("example url");
 		
 		Item item2 = new Item();
 		item2.setCategory("Technology");
@@ -591,6 +619,7 @@ public class ShoppingCartServiceTest {
 		item2.setName("Kindle PaperWhite 4");
 		item2.setPrice(3400);
 		item2.setQuantity(1);
+		item2.setUrl("example url");
 		
 		sc.setCustomerId("customer1");
 		sc.setId("649821aafff");
@@ -814,6 +843,7 @@ public class ShoppingCartServiceTest {
 		item1.setName("El Yayı - 200 Lbs");
 		item1.setPrice(190);
 		item1.setQuantity(2);
+		item1.setUrl("");
 		
 		Item item2 = new Item();
 		item2.setCategory("Technology");
@@ -821,6 +851,7 @@ public class ShoppingCartServiceTest {
 		item2.setName("Kindle PaperWhite 4");
 		item2.setPrice(3400);
 		item2.setQuantity(1);
+		item2.setUrl("");
 		
 		Coupon coupon1 = new Coupon();
 		coupon1.setAmount(100);
@@ -910,6 +941,7 @@ public class ShoppingCartServiceTest {
 		item1.setName("El Yayı - 200 Lbs");
 		item1.setPrice(190);
 		item1.setQuantity(2);
+		item1.setUrl("");
 		
 		Item item2 = new Item();
 		item2.setCategory("Technology");
@@ -917,6 +949,7 @@ public class ShoppingCartServiceTest {
 		item2.setName("Kindle PaperWhite 4");
 		item2.setPrice(3400);
 		item2.setQuantity(1);
+		item2.setUrl("");
 		
 		sc.setCustomerId("customer1");
 		sc.setId("649821aafff");
@@ -1029,6 +1062,7 @@ public class ShoppingCartServiceTest {
 		item1.setName("El Yayı - 200 Lbs");
 		item1.setPrice(190);
 		item1.setQuantity(2);
+		item1.setUrl("");
 		
 		Item item2 = new Item();
 		item2.setCategory("Technology");
@@ -1036,6 +1070,7 @@ public class ShoppingCartServiceTest {
 		item2.setName("Kindle PaperWhite 4");
 		item2.setPrice(3400);
 		item2.setQuantity(1);
+		item2.setUrl("");
 		
 		Coupon coupon1 = new Coupon();
 		coupon1.setAmount(100);
@@ -1050,7 +1085,8 @@ public class ShoppingCartServiceTest {
 		when(shoppingCartRepository.findById(sc.getId())).thenReturn(Optional.of(sc));
 		when(shoppingCartRepository.save(sc)).thenReturn(sc);
 		
-		sc.setCoupons(shoppingCartService.applyCoupon(sc.getId(), coupon1));
+		if (sc.getCoupons() == null) sc.setCoupons(new java.util.ArrayList<>());
+		sc.getCoupons().add(shoppingCartService.applyCoupon(sc.getId(), coupon1));
 		
 		verify(shoppingCartRepository).findById(sc.getId());
 		verify(shoppingCartRepository).save(sc);
@@ -1060,8 +1096,54 @@ public class ShoppingCartServiceTest {
 		assertEquals(3680, sc.getDiscountedPrice());
 		assertEquals(3780, sc.getTotalPrice());
 	}
+	
 	@Test
-	@DisplayName("Test for applyCoupon but coupon list is not null")
+	@DisplayName("Test for applyCoupon, coupon list is null")
+	public void applyCouponButCouponListIsNull() {
+		ShoppingCart sc = new ShoppingCart();
+		
+		Item item1 = new Item();
+		item1.setCategory("Sports");
+		item1.setId("1");
+		item1.setName("El Yayı - 200 Lbs");
+		item1.setPrice(190);
+		item1.setQuantity(2);
+		item1.setUrl("");
+		
+		Item item2 = new Item();
+		item2.setCategory("Technology");
+		item2.setId("2");
+		item2.setName("Kindle PaperWhite 4");
+		item2.setPrice(3400);
+		item2.setQuantity(1);
+		item2.setUrl("");
+		
+		Coupon coupon1 = new Coupon();
+		coupon1.setAmount(100);
+		coupon1.setId("1");
+		coupon1.setRate(0);
+		coupon1.setType("amount");
+		
+		sc.setCustomerId("customer1");
+		sc.setId("649821aafff");
+		sc.setItems(List.of(item1, item2));
+		
+		when(shoppingCartRepository.findById(sc.getId())).thenReturn(Optional.of(sc));
+		when(shoppingCartRepository.save(sc)).thenReturn(sc);
+		
+		shoppingCartService.applyCoupon(sc.getId(), coupon1);
+		
+		verify(shoppingCartRepository).findById(sc.getId());
+		verify(shoppingCartRepository).save(sc);
+		
+		assertThat(sc.getCoupons().contains(coupon1));
+		assertThat(sc.getCoupons().size() == 1);
+		assertEquals(3680, sc.getDiscountedPrice());
+		assertEquals(3780, sc.getTotalPrice());
+	}
+	
+	@Test
+	@DisplayName("Test for applyCoupon, but coupon list is not null")
 	public void applyCouponButCouponListIsNotNull() {
 		ShoppingCart sc = new ShoppingCart();
 		
@@ -1071,6 +1153,7 @@ public class ShoppingCartServiceTest {
 		item1.setName("El Yayı - 200 Lbs");
 		item1.setPrice(190);
 		item1.setQuantity(2);
+		item1.setUrl("");
 		
 		Item item2 = new Item();
 		item2.setCategory("Technology");
@@ -1078,6 +1161,7 @@ public class ShoppingCartServiceTest {
 		item2.setName("Kindle PaperWhite 4");
 		item2.setPrice(3400);
 		item2.setQuantity(1);
+		item2.setUrl("");
 		
 		Coupon coupon1 = new Coupon();
 		coupon1.setAmount(100);
@@ -1094,7 +1178,7 @@ public class ShoppingCartServiceTest {
 		when(shoppingCartRepository.findById(sc.getId())).thenReturn(Optional.of(sc));
 		when(shoppingCartRepository.save(sc)).thenReturn(sc);
 		
-		sc.setCoupons(shoppingCartService.applyCoupon(sc.getId(), coupon1));
+		sc.getCoupons().add(shoppingCartService.applyCoupon(sc.getId(), coupon1));
 		
 		verify(shoppingCartRepository).findById(sc.getId());
 		verify(shoppingCartRepository).save(sc);
@@ -1116,6 +1200,7 @@ public class ShoppingCartServiceTest {
 		item1.setName("El Yayı - 200 Lbs");
 		item1.setPrice(190);
 		item1.setQuantity(2);
+		item1.setUrl("");
 		
 		Item item2 = new Item();
 		item2.setCategory("Technology");
@@ -1123,6 +1208,7 @@ public class ShoppingCartServiceTest {
 		item2.setName("Kindle PaperWhite 4");
 		item2.setPrice(3400);
 		item2.setQuantity(1);
+		item2.setUrl("");
 		
 		//the item that is going to be added
 		Item item3 = new Item();
@@ -1131,6 +1217,7 @@ public class ShoppingCartServiceTest {
 		item3.setName("Kindle PaperWhite 5");
 		item3.setPrice(5000);
 		item3.setQuantity(1);
+		item3.setUrl("");
 		
 		Coupon coupon1 = new Coupon();
 		coupon1.setAmount(100);

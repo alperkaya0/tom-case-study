@@ -65,6 +65,43 @@ public class ShoppingCartControllerIT {
     }
     
     @Test
+    @DisplayName("IT - Should return OK and json of a shopping cart")
+    public void getShoppingCartById() throws Exception {
+    	ShoppingCart sc1 = new ShoppingCart();
+    	
+    	Item item1 = new Item();
+    	item1.setId("1");
+    	item1.setCategory("sports");
+    	item1.setName("name");
+    	item1.setPrice(10);
+    	item1.setQuantity(1);
+    	item1.setUrl("");
+    	
+    	Coupon coupon1 = new Coupon();
+    	coupon1.setId("coupon1");
+    	
+    	sc1.setId("1");
+    	sc1.setCoupons(List.of(coupon1));
+    	sc1.setCustomerId("customer1");
+    	sc1.setDiscountedPrice(100);
+    	sc1.setTotalPrice(100);
+    	sc1.setItems(List.of(item1));
+    	
+    	when(service.getShoppingCartById(sc1.getId())).thenReturn(sc1);
+
+    	mockMvc.perform(get("/v1/shopping-carts/" + sc1.getId()))
+    					.andExpect(status().isOk())
+    					.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    					.andExpect(jsonPath("$.id").value("1"))
+    					.andExpect(jsonPath("$.customerId").value("customer1"))
+    					.andExpect(jsonPath("$.discountedPrice").value(100))
+    					.andExpect(jsonPath("$.totalPrice").value(100))
+    					.andExpect(jsonPath("$.items[0].id").value("1"))
+    					.andExpect(jsonPath("$.coupons[0].id").value("coupon1"));
+		
+    }
+    
+    @Test
     @DisplayName("IT - Should return OK and list of jsons of items")
     public void getAllItemsInShoppingCarts() throws Exception {
     	String id = "someId";
@@ -161,19 +198,18 @@ public class ShoppingCartControllerIT {
     	resCoupon.setType("amount");
     	resCoupon.setId("coupon1");
     	
-    	when(service.applyCoupon(id, coupon)).thenReturn(List.of(resCoupon));
+    	when(service.applyCoupon(id, coupon)).thenReturn(resCoupon);
     	
     	mockMvc.perform(post("/v1/shopping-carts/" + id + "/coupons")
     					.contentType(MediaType.APPLICATION_JSON)
     					.content(objectMapper.writeValueAsString(coupon))
     					.accept(MediaType.APPLICATION_JSON))
     				.andExpect(status().isCreated())
-    				.andExpect(jsonPath("$[0].id").value("coupon1"))
-    				.andExpect(jsonPath("$[0].type").value("amount"))
-    				.andExpect(jsonPath("$[0].amount").value(50))
-    				.andExpect(jsonPath("$[0].rate").value(0));
+    				.andExpect(jsonPath("$.id").value("coupon1"))
+    				.andExpect(jsonPath("$.type").value("amount"))
+    				.andExpect(jsonPath("$.amount").value(50))
+    				.andExpect(jsonPath("$.rate").value(0));
 		
-    	
     	verify(service).applyCoupon(id, coupon);
     }
     

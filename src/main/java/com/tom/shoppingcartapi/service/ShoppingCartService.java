@@ -71,6 +71,9 @@ public class ShoppingCartService {
 	}
 	
 	public void validateItem(Item item) {
+		if (item.getUrl() == null) {
+			throw new BadItemException("Item url cannot be empty.");
+		}
 		if (item.getName() == null) {
 			throw new BadItemException("Item name cannot be empty.");
 		}
@@ -216,7 +219,7 @@ public class ShoppingCartService {
 		}
 	}
 
-	public List<Coupon> applyCoupon(String id, Coupon coupon) {
+	public Coupon applyCoupon(String id, Coupon coupon) {
 		//validate that coupon is correct
 		changeCouponToHardCoded(coupon);
 		validateCoupon(coupon);
@@ -238,7 +241,7 @@ public class ShoppingCartService {
 		//overwrite the old shopping cart
 		shoppingCartRepository.save(sC);
 		
-		return sC.getCoupons();
+		return coupon;
 	}
 
 	public List<Item> addNewItemToShoppingCart(String id, Item item) {
