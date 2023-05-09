@@ -527,7 +527,7 @@ public class ShoppingCartServiceTest {
 
 		Coupon coupon2 = new Coupon();
 		coupon2.setAmount(0);
-		coupon2.setId("2");
+		coupon2.setId("coupon1");
 		coupon2.setRate(0.2);
 		coupon2.setType("rate");
 		
@@ -537,6 +537,10 @@ public class ShoppingCartServiceTest {
 		sc.setItems(List.of(item1, item2));
 		
 		shoppingCartService.validateWholeShoppingCart(sc);
+		
+		assertEquals(50, sc.getCoupons().get(sc.getCoupons().indexOf(coupon2)).getAmount());
+		assertEquals(0, sc.getCoupons().get(sc.getCoupons().indexOf(coupon2)).getRate());
+		assertEquals("amount", sc.getCoupons().get(sc.getCoupons().indexOf(coupon2)).getType());
 	}
 	
 	@Test
