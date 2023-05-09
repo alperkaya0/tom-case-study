@@ -58,6 +58,7 @@ POST
 ### Parameters
 No parameters.
 ### Request Body
+ShoppingCart object.
 ```
 {
     "id": "STRING_ID" @Optional
