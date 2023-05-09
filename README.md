@@ -36,7 +36,7 @@ No body.
 ---
 
 ## Get items in a shopping cart - ("/v1/shopping-carts/{id}/items")
-This endpoint returns a list of Items in a shopping cart that id={id};
+This endpoint returns a list of Items in a shopping cart that id={id}.
 ### Request Type
 GET
 ### Parameters
@@ -52,7 +52,7 @@ No body.
 ---
 
 ## Create new shopping cart - ("/v1/shopping-carts")
-This endpoint creates the given shopping card and returns it back to the client
+This endpoint creates the given shopping card and returns it back to the client.
 ### Request Type
 POST
 ### Parameters
@@ -70,8 +70,8 @@ No parameters.
             "price": DOUBLE_PRICE,
             "quantity": INTEGER_QUANTITY,
             "category": "STRING_CATEGORY",
-            "createDate": "DATE",
-            "changeDate": "DATE"
+            "createDate": "DATE", @Optional(auto-assigned)
+            "changeDate": "DATE" @Optional(auto-assigned)
         }
     ],
     "coupons": [ @Optional
@@ -104,3 +104,39 @@ Amounts should be positive.
 | 201 | Created |
 | 409 | ShoppingCartAlreadyPresentException |
 | 400 | BadShoppingCartException |
+| 400 | BadCouponException |
+| 400 | BadItemException |
+
+---
+
+## Add new item to a shopping cart - ("/v1/shopping-carts/{id}/items")
+This endpoint returns a list of items after adding the given item to the items list of a shopping cart that id={id}.
+### Request Type
+POST
+### Parameters
+PathVariable: String id
+### Request Body
+Item object.
+```
+{
+    "id": "STRING_ID_ITEM",
+    "name": "STRING_NAME",
+    "url": "STRING_URL",
+    "price": DOUBLE_PRICE,
+    "quantity": INTEGER_QUANTITY,
+    "category": "STRING_CATEGORY",
+    "createDate": "DATE", @Optional(auto-assigned)
+    "changeDate": "DATE" @Optional(auto-assigned)
+}
+```
+### Responses
+| Code | Description |
+| ----------- | ----------- |
+| 200 | Success |
+| 404 | ShoppingCartNotFoundException |
+| 400 | BadItemException |
+| 400 | BadShoppingCartException |
+| 400 | BadCouponException |
+
+---
+
