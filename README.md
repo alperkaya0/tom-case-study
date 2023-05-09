@@ -18,7 +18,21 @@ No body.
 | 200 | Success |
 
 ## Get a shopping cart by id - ("/v1/shopping-carts/{id}")
-This endpoints returns a ShoppingCart object that id={id}.
+This endpoint returns a ShoppingCart object that id={id}.
+### Request Type
+GET
+### Parameters
+PathVariable: String id
+### Request Body
+No body.
+### Responses
+| Code | Description |
+| ----------- | ----------- |
+| 200 | Success |
+| 404 | ShoppingCartNotFoundException |
+
+## Get items in a shopping cart - ("/v1/shopping-carts/{id}/items")
+This endpoint returns a list of Items in a shopping cart that id={id};
 ### Request Type
 GET
 ### Parameters
