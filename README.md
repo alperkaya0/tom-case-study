@@ -102,10 +102,11 @@ Amounts should be positive.
 | Code | Description |
 | ----------- | ----------- |
 | 201 | Created |
-| 409 | ShoppingCartAlreadyPresentException |
 | 400 | BadShoppingCartException |
 | 400 | BadCouponException |
 | 400 | BadItemException |
+| 409 | ItemAlreadyPresent |
+| 409 | CouponAlreadyPresentException |
 
 ---
 
@@ -133,10 +134,11 @@ Item object.
 | Code | Description |
 | ----------- | ----------- |
 | 200 | Success |
-| 404 | ShoppingCartNotFoundException |
 | 400 | BadItemException |
 | 400 | BadShoppingCartException |
 | 400 | BadCouponException |
+| 404 | ShoppingCartNotFoundException |
+| 409 | ItemAlreadyPresent |
 
 ---
 
