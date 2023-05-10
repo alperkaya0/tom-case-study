@@ -1,11 +1,78 @@
 # Shopping Cart API
-This API is a case study for T.O.M. company. <br>I have used combinations of different design patterns in my project: modified MVC with focus on controller and model layers, Repository Pattern, Service Pattern, Exception Handling Pattern. Since my API doesn't need any user interface, I didn't need to write any views. <br>S.O.L.I.D. principles were always top priority at development stage, no layer does the job of any other layer, no function deals with anything more than it needs to deal. <br>Following are the technologies I have used in this project: Java 17, Maven, Spring, SpringBoot, Spring Initializr, Spring Boot Actuator, Docker, Postman, MongoDB, JUnit, Mockito, TomCat, WebMvcTest, AWS, EC2. <br>Both code comments and API explanation are ready as a documentation.
+This API is a case study for T.O.M. company. <br>I have used combinations of different design patterns in my project: modified MVC with focus on controller and model layers, Repository Pattern, Service Pattern, Exception Handling Pattern. Since my API doesn't need any user interface, I didn't need to write any views. <br>S.O.L.I.D. principles were always top priority at development stage, no layer does the job of any other layer, no function deals with anything more than it needs to deal. <br>Following are the technologies I have used in this project: Java 17, Maven, Spring, SpringBoot, Spring Initializr, Spring Boot Actuator, Docker, Postman, MongoDB, JUnit, Mockito, TomCat, MockMVC, AWS, EC2. <br>Both code comments and API explanation are ready as a documentation.
 
 # Important Note for FrontEnd Developers
 After creating a shopping cart please store id of shopping cart, because you will need it for nearly every request.
 
 # How to Use
 This is the base url where you can access it directly from clearnet, http://16.171.2.137:8080/v1/shopping-carts
+
+# Test Driven Development
+The project is written as it can be tested. ShoppingCartServiceTest and ShoppingCartControllerIT are test classes. Mockite is used in this project. Unit tests are written with JUnit and Mockito, Integration tests are written with MockMVC and Mockito. <br>
+
+51 Unit tests are passed. <br>
+- getItemsOfShoppingCartById()
+- getItemsOfShoppingCartByIdThrowsShoppingCartNotFoundException()
+- getAllShoppingCarts()
+- getShoppingCartById()
+- getShoppingCartByIdThrowsException()
+- validateItem()
+- validateItemUrlThrowsException()
+- validateItemNameThrowsException()
+- validateItemPriceThrowsException()
+- validateItemPriceThrowsException2()
+- validateItemQuantityThrowsException()
+- validateItemQuantityThrowsException2()
+- validateItemCategoryThrowsException()
+- changeCouponToHardCoded()
+- changeCouponToHardCodedCoupon1()
+- changeCouponToHardCodedCoupon2()
+- changeCouponToHardCodedCoupon3()
+- validateCoupon()
+- validateCoupon2()
+- validateCoupon3()
+- validateCouponTypeThrowsException()
+- validateCouponTypeThrowsException2()
+- validateCouponTypeIsAmountButRateIsNotZeroThrowsException()
+- validateCouponTypeIsRateButAmountIsNotZeroThrowsException()
+- validateCouponBothRateAndAmountAreZeroThrowsException()
+- validateCouponTypeIsRateButRateIsNegativeThrowsException()
+- validateCouponTypeIsRateButRateIsBiggerThanOneThrowsException()
+- validateCouponTypeIsAmountButAmountIsNegativeThrowsException()
+- validateCouponTypeIsAmountButAmountIsZeroThrowsException()
+- validateWholeShoppingCart()
+- validateWholeShoppingCartTotalPriceThrowsException()
+- validateWholeShoppingCartDiscountedPriceThrowsException()
+- validateWholeShoppingCartItemListHasRepetitionThrowsException()
+- validateWholeShoppingCartCouponListHasRepetitionThrowsException()
+- validateWholeShoppingCartCouponListIsEmpty()
+- calculatePrices()
+- calculatePricesButTotalAmountOfCouponsBiggerThanCartSum()
+- calculatePricesButCouponTypeIsWrongThrowsException()
+- calculatePricesButCouponListIsNull()
+- calculatePricesButSumIsEqualsToUpperLimit()
+- createNewShoppingCart()
+- createNewShoppingCartButShoppingCartAlreadyExistsThrowException()
+- createNewShoppingCartButShoppingCartAlreadyExists2ThrowException()
+- createNewShoppingCartButCouponListIsNull()
+- createNewShoppingCartButItemListIsNull()
+- deleteItem()
+- deleteItemButItemNotFoundThrowsException()
+- applyCoupon()
+- applyCouponButCouponListIsNull()
+- applyCouponButCouponListIsNotNull()
+- addNewItemToShoppingCart()
+
+7 Integration tests are passed. <br>
+- getAllShoppingCarts()       
+- getShoppingCartById()       
+- getAllItemsInShoppingCarts()
+- addNewShoppingCart()        
+- addNewItemToShoppingCart()  
+- applyCouponToShoppingCart() 
+- deleteItemInShoppingCart()
+
+
 
 # Endpoints
 ## Get all shopping carts - ("/v1/shopping-carts")
