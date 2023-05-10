@@ -1,0 +1,12 @@
+version: "3"
+services:
+  mongo:
+    image: 8b33e239cde6
+    ports:
+      - "27017:27017"
+    restart: always
+  springbootapp:
+    image: 230716c5ded8
+    ports:
+      - "8080:8080"
+    restart: always
