@@ -39,7 +39,7 @@ No body.
 
 ---
 
-## Get items in a shopping cart - ("/v1/shopping-carts/{id}/items")
+## Get all items in a shopping cart - ("/v1/shopping-carts/{id}/items")
 This endpoint returns a list of Items in a shopping cart that id={id}.
 ### Returns
 List\<Item\>.
@@ -50,10 +50,10 @@ PathVariable: String id
 ### Request Body
 No body.
 ### Responses
-| Code | Description |
-| ----------- | ----------- |
-| 200 | Success |
-| 404 | ShoppingCartNotFoundException |
+| Code | Description | Text |
+| ----------- | ----------- | ----------- |
+| 200 | Success ||
+| 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
 
 ---
 
@@ -108,14 +108,15 @@ Type can be either 'rate' or 'amount'. If you pick 'rate' as type then amount sh
 Rates should be between 0 and 1, and cannot be 0.
 Amounts should be positive.
 ### Responses
-| Code | Description |
-| ----------- | ----------- |
-| 201 | Created |
-| 400 | BadShoppingCartException |
-| 400 | BadCouponException |
-| 400 | BadItemException |
-| 409 | ItemAlreadyPresent |
-| 409 | CouponAlreadyPresentException |
+| Code | Description | Text |
+| ----------- | ----------- | ----------- |
+| 201 | Created ||
+| 400 | BadShoppingCartException | Price must be a positive number. Incorrect shopping cart. |
+| 400 | BadCouponException | Item (url\|name\|category name) cannot be empty.\|(Price\|Quantity) must be a positive number. |
+| 400 | BadItemException |  |
+| 409 | ItemAlreadyPresent | There are multiple items with the same id. Incorrect shopping cart. |
+| 409 | CouponAlreadyPresentException | There are multiple coupons with the same id. Incorrect shopping cart. |
+| 409 | ShoppingCartAlreadyPresentException | ShoppingCart with that id already present. You may want to update it or delete then recreate it. |
 
 ---
 
