@@ -112,8 +112,8 @@ Amounts should be positive.
 | ----------- | ----------- | ----------- |
 | 201 | Created ||
 | 400 | BadShoppingCartException | Price must be a positive number. Incorrect shopping cart. |
-| 400 | BadCouponException | Item (url\|name\|category name) cannot be empty.\|(Price\|Quantity) must be a positive number. |
-| 400 | BadItemException |  |
+| 400 | BadCouponException ||
+| 400 | BadItemException | Item (url\|name\|category name) cannot be empty.\|(Price\|Quantity) must be a positive number. |
 | 409 | ItemAlreadyPresent | There are multiple items with the same id. Incorrect shopping cart. |
 | 409 | CouponAlreadyPresentException | There are multiple coupons with the same id. Incorrect shopping cart. |
 | 409 | ShoppingCartAlreadyPresentException | ShoppingCart with that id already present. You may want to update it or delete then recreate it. |
