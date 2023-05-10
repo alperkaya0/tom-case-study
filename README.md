@@ -5,8 +5,8 @@ After creating a shopping cart please store id of shopping cart, because you wil
 
 # How to Use
 This is the base url where you can access it directly from clearnet, http://16.171.2.137:8080/v1/shopping-carts
-# Endpoints
 
+# Endpoints
 ## Get all shopping carts - ("/v1/shopping-carts")
 This endpoint returns list of every shopping carts.
 ### Returns
