@@ -202,4 +202,4 @@ No body.
 | ----------- | ----------- | ----------- |
 | 201 | Created ||
 | 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
-| 404 | ItemNotFoundException | "There is no Item with that id." |
+| 404 | ItemNotFoundException | There is no Item with that id. |
