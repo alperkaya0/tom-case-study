@@ -183,7 +183,7 @@ If you are going to use the second stucture then coupon id must be different tha
 }
 ```
 ### Important Notes
-Type must be either 'rate' or 'amount'. If you picked 'rate' then amount should be 0 and rate should be between 0 and 1. If you picked 'amount' then rate should be 0 and amount should be positive. Id must be different than other coupons' id at the specific shopping cart.
+Type must be either 'rate' or 'amount'. If you picked 'rate' then amount should be 0 and rate should be between 0 and 1. If you picked 'amount' then rate should be 0 and amount should be positive. Id must be different than other coupons' id at the specific shopping cart. **I could have done this better by not having rate or amount but by having only 'value' and 'type'.**
 ### Responses
 | Code | Description | Text |
 | ----------- | ----------- | ----------- |
