@@ -32,10 +32,10 @@ PathVariable: String id
 ### Request Body
 No body.
 ### Responses
-| Code | Description |
+| Code | Description | Text |
 | ----------- | ----------- |
-| 200 | Success |
-| 404 | ShoppingCartNotFoundException |
+| 200 | Success | |
+| 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
 
 ---
 
