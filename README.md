@@ -192,6 +192,8 @@ Type must be either 'rate' or 'amount'. If you picked 'rate' then amount should 
 | 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
 | 409 | CouponAlreadyPresentException | There are multiple coupons with the same id. Incorrect shopping cart. |
 
+---
+
 ## Delete an item - ("/v1/shopping-carts/{id}/items/{itemId}")
 This endpoint deletes an item from a shopping cart. And returns nothing.
 ### Returns
@@ -209,3 +211,18 @@ No body.
 | 201 | Created ||
 | 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
 | 404 | ItemNotFoundException | There is no Item with that id. |
+
+---
+
+## Actuator - ("/actuator")
+You can use this endpoint to see different informations and metrics about the API like logs, status etc.
+### Returns
+Information about the API.
+### Parameters
+No parameters.
+### Request Body
+No body.
+### Responses
+| Code | Description | Text |
+| ----------- | ----------- | ----------- |
+| 200 | Success ||
