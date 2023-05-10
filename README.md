@@ -7,7 +7,7 @@
 ## Get all shopping carts - ("/v1/shopping-carts")
 This endpoint returns list of every shopping carts.
 ### Returns
-List<ShoppingCart>.
+List\<ShoppingCart\>.
 ### Request Type
 GET
 ### Parameters
