@@ -151,7 +151,7 @@ No parameters.
 ShoppingCart object.
 ```
 {
-    "id": "STRING_ID" @Optional
+    "id": "STRING_ID"
     "customerId": "STRING_ID",
     "items": [ @Optional
         { @Optional

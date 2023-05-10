@@ -32,7 +32,6 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/v1/shopping-carts")
 @AllArgsConstructor
-@CrossOrigin(origins = "*")
 public class ShoppingCartController {
 	private final ShoppingCartService shoppingCartService;
 	
