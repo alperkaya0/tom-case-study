@@ -80,7 +80,7 @@ The project is written as it can be tested. ShoppingCartServiceTest and Shopping
 | com.tom.shoppingcartapi.controller | ShoppingCartController | 100% |
 
 ## Important Notes on Code Coverage
-- I exclude exception handlers in controller, while calculating code coverage because they are one line methods that has no user implementation in it.
+- I exclude exception handlers in controller while calculating code coverage because they are one line methods that has no user implementation in it.
 - Because my business logic only resides at ShoppingCartService, I wrote my unit tests only for service layer, and I calculate code coverage according to that.
 
 # Endpoints
