@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import com.tom.shoppingcartapi.exception.BadCouponException;
 import com.tom.shoppingcartapi.exception.BadItemException;
 import com.tom.shoppingcartapi.exception.BadShoppingCartException;
+import com.tom.shoppingcartapi.exception.CouponAlreadyPresentException;
+import com.tom.shoppingcartapi.exception.ItemAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ItemNotFoundException;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
@@ -106,7 +108,7 @@ public class ShoppingCartService {
 		//Check if any id occurred more than once
 		for (String key : ids.keySet()) {
 			if (ids.get(key) > 1) {
-				throw new BadShoppingCartException("There are multiple items with the same id. Incorrect shopping cart.");
+				throw new ItemAlreadyPresentException("There are multiple items with the same id. Incorrect shopping cart.");
 			}
 		}
 		//Validate that coupons have different id
@@ -125,7 +127,7 @@ public class ShoppingCartService {
 		}
 		for (String key : ids.keySet()) {
 			if (ids.get(key) > 1) {
-				throw new BadShoppingCartException("There are multiple coupons with the same id. Incorrect shopping cart.");
+				throw new CouponAlreadyPresentException("There are multiple coupons with the same id. Incorrect shopping cart.");
 			}
 		}
 	}

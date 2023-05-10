@@ -6,6 +6,8 @@
 
 ## Get all shopping carts - ("/v1/shopping-carts")
 This endpoint returns list of every shopping carts.
+### Returns
+**List<ShoppingCart>**.
 ### Request Type
 GET
 ### Parameters
@@ -21,6 +23,8 @@ No body.
 
 ## Get a shopping cart by id - ("/v1/shopping-carts/{id}")
 This endpoint returns a ShoppingCart object that id={id}.
+### Returns
+**ShoppingCart object**.
 ### Request Type
 GET
 ### Parameters
@@ -37,6 +41,8 @@ No body.
 
 ## Get items in a shopping cart - ("/v1/shopping-carts/{id}/items")
 This endpoint returns a list of Items in a shopping cart that id={id}.
+### Returns
+**List<Item>**.
 ### Request Type
 GET
 ### Parameters
@@ -53,6 +59,8 @@ No body.
 
 ## Create new shopping cart - ("/v1/shopping-carts")
 This endpoint creates the given shopping card and returns it back to the client.
+### Returns
+**ShoppingCart object** that is newly created.
 ### Request Type
 POST
 ### Parameters
@@ -113,6 +121,8 @@ Amounts should be positive.
 
 ## Add new item to a shopping cart - ("/v1/shopping-carts/{id}/items")
 This endpoint returns a list of items after adding the given item to the items list of a shopping cart that id={id}.
+### Returns
+**List<Item>** that is updated recently.
 ### Request Type
 POST
 ### Parameters
@@ -137,9 +147,58 @@ Item object.
 | 200 | Success |
 | 400 | BadItemException |
 | 400 | BadShoppingCartException |
-| 400 | BadCouponException |
 | 404 | ShoppingCartNotFoundException |
 | 409 | ItemAlreadyPresent |
 
 ---
 
+## Apply a coupon - ("/v1/shopping-carts/{id}/coupons")
+Apply a coupon to a specific shopping cart that id={id}. Total price and discounted price will be automatically updated if coupon is correct.
+### Returns
+**Coupon object** that is newly created.
+### Request Type
+POST
+### Parameters
+PathVariable: String id
+### Request Body
+Coupon object.
+If you are going to use the first structure then id must be either 'coupon1', 'coupon2' or 'coupon3'.
+```
+{
+    "id": "STRING_ID"
+}
+If you are going to use the second stucture then coupon id must be different than first one's and other coupons at the shopping cart.
+{
+    "id": "STRING_ID",
+    "type": "STRING_TYPE",
+    "rate": DOUBLE_RATE,
+    "amount": DOUBLE_AMOUNT
+}
+```
+### Important Notes
+Type must be either 'rate' or 'amount'. If you picked 'rate' then amount should be 0 and rate should be between 0 and 1. If you picked 'amount' then rate should be 0 and amount should be positive. Id must be different than other coupons' id at the specific shopping cart.
+### Responses
+| Code | Description |
+| ----------- | ----------- |
+| 201 | Created |
+| 400 | BadCouponException |
+| 404 | ShoppingCartNotFoundException |
+| 409 | CouponAlreadyPresentsException |
+
+## Delete an item - ("/v1/shopping-carts/{id}/items/{itemId}")
+This endpoint deletes an item from a shopping cart. And returns nothing.
+### Returns
+Void.
+### Request Type
+DELETE
+### Parameters
+PathVariable: String id
+PathVariable: String itemId
+### Request Body
+No body.
+### Responses
+| Code | Description |
+| ----------- | ----------- |
+| 201 | Created |
+| 404 | ShoppingCartNotFoundException |
+| 404 | ItemNotFoundException |
