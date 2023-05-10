@@ -112,7 +112,7 @@ Amounts should be positive.
 | ----------- | ----------- | ----------- |
 | 201 | Created ||
 | 400 | BadShoppingCartException | Price must be a positive number. Incorrect shopping cart. |
-| 400 | BadCouponException | Type of a coupon cannot be neither empty nor null.\|Type of a coupon must be either 'rate' or 'amount'.\|Rate of a coupon of type rate, must be a positive value between 0 and 1.\|Amount of a coupon of type amount, must be a positive value.\|Amount of, a coupon of type rate must be zero.\|Rate of, a coupon of type amount must be zero. |
+| 400 | BadCouponException | Type of a coupon cannot be neither empty nor null.<br>Type of a coupon must be either 'rate' or 'amount'.\|Rate of a coupon of type rate, must be a positive value between 0 and 1.\|Amount of a coupon of type amount, must be a positive value.\|Amount of, a coupon of type rate must be zero.\|Rate of, a coupon of type amount must be zero. |
 | 400 | BadItemException | Item (url\|name\|category name) cannot be empty.\|(Price\|Quantity) must be a positive number. |
 | 409 | ItemAlreadyPresent | There are multiple items with the same id. Incorrect shopping cart. |
 | 409 | CouponAlreadyPresentException | There are multiple coupons with the same id. Incorrect shopping cart. |
