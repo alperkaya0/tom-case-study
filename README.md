@@ -172,7 +172,9 @@ If you are going to use the first structure then id must be either 'coupon1', 'c
 {
     "id": "STRING_ID"
 }
+```
 If you are going to use the second stucture then coupon id must be different than first one's and other coupons at the shopping cart.
+```
 {
     "id": "STRING_ID",
     "type": "STRING_TYPE",
