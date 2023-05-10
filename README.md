@@ -192,7 +192,7 @@ Void.
 ### Request Type
 DELETE
 ### Parameters
-PathVariable: String id
+PathVariable: String id <br>
 PathVariable: String itemId
 ### Request Body
 No body.
