@@ -34,7 +34,7 @@ No body.
 ### Responses
 | Code | Description | Text |
 | ----------- | ----------- | ----------- |
-| 200 | Success | No text returned. |
+| 200 | Success ||
 | 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
 
 ---
