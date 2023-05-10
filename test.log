@@ -1,0 +1,6 @@
+2023-05-10T19:34:53.808+03:00  INFO 964 --- [main] c.t.s.c.ShoppingCartControllerIT         : Starting ShoppingCartControllerIT using Java 17.0.6 with PID 964 (started by Eren in D:\tomcase\shopping-cart-api)
+2023-05-10T19:34:53.810+03:00  INFO 964 --- [main] c.t.s.c.ShoppingCartControllerIT         : No active profile set, falling back to 1 default profile: "default"
+2023-05-10T19:34:56.467+03:00  INFO 964 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2023-05-10T19:34:56.467+03:00  INFO 964 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2023-05-10T19:34:56.469+03:00  INFO 964 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2023-05-10T19:34:56.572+03:00  INFO 964 --- [main] c.t.s.c.ShoppingCartControllerIT         : Started ShoppingCartControllerIT in 3.568 seconds (process running for 5.88)
