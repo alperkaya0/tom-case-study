@@ -21,6 +21,8 @@ import com.tom.shoppingcartapi.model.*;
 import com.tom.shoppingcartapi.exception.BadCouponException;
 import com.tom.shoppingcartapi.exception.BadItemException;
 import com.tom.shoppingcartapi.exception.BadShoppingCartException;
+import com.tom.shoppingcartapi.exception.CouponAlreadyPresentException;
+import com.tom.shoppingcartapi.exception.ItemAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ItemNotFoundException;
 import com.tom.shoppingcartapi.exception.ShoppingCartAlreadyPresentException;
 import com.tom.shoppingcartapi.exception.ShoppingCartNotFoundException;
@@ -625,7 +627,7 @@ public class ShoppingCartServiceTest {
 		sc.setId("649821aafff");
 		sc.setItems(List.of(item1, item2));
 		
-		BadShoppingCartException e = assertThrows(BadShoppingCartException.class, () -> {
+		ItemAlreadyPresentException e = assertThrows(ItemAlreadyPresentException.class, () -> {
 			shoppingCartService.validateWholeShoppingCart(sc);
 		});
 		
@@ -633,7 +635,7 @@ public class ShoppingCartServiceTest {
 	}
 	
 	@Test
-	@DisplayName("Negative test of validateWholeShoppingCart, id of items are re-occuring")
+	@DisplayName("Negative test of validateWholeShoppingCart, id of coupons are re-occuring")
 	public void validateWholeShoppingCartCouponListHasRepetitionThrowsException() {
 		ShoppingCart sc = new ShoppingCart();
 
@@ -653,7 +655,7 @@ public class ShoppingCartServiceTest {
 		sc.setId("649821aafff");
 		sc.setCoupons(List.of(coupon1, coupon2));
 		
-		BadShoppingCartException e = assertThrows(BadShoppingCartException.class, () -> {
+		CouponAlreadyPresentException e = assertThrows(CouponAlreadyPresentException.class, () -> {
 			shoppingCartService.validateWholeShoppingCart(sc);
 		});
 		
