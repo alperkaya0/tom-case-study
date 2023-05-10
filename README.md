@@ -10,7 +10,7 @@ This is the base url where you can access it directly from clearnet, http://16.1
 # Test Driven Development
 The project is written as it can be tested. ShoppingCartServiceTest and ShoppingCartControllerIT are test classes. Mockito is used in this project. Unit tests are written with JUnit and Mockito, Integration tests are written with MockMVC and Mockito. <br>
 
-51 Unit tests are passed. <br>
+**51 Unit tests are passed.** <br>
 - getItemsOfShoppingCartById()
 - getItemsOfShoppingCartByIdThrowsShoppingCartNotFoundException()
 - getAllShoppingCarts()
@@ -63,7 +63,7 @@ The project is written as it can be tested. ShoppingCartServiceTest and Shopping
 - applyCouponButCouponListIsNotNull()
 - addNewItemToShoppingCart()
 
-7 Integration tests are passed. <br>
+**7 Integration tests are passed.** <br>
 - getAllShoppingCarts()       
 - getShoppingCartById()       
 - getAllItemsInShoppingCarts()
@@ -72,6 +72,7 @@ The project is written as it can be tested. ShoppingCartServiceTest and Shopping
 - applyCouponToShoppingCart() 
 - deleteItemInShoppingCart()
 
+# Code Coverage
 
 
 # Endpoints
