@@ -1,7 +1,7 @@
 # Shopping Cart API
 
 # How to Use
-
+This is the base url where you can use it directly from clearnet, http://16.171.2.137:8080/v1/shopping-carts
 # Endpoints
 
 ## Get all shopping carts - ("/v1/shopping-carts")
