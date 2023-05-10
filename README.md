@@ -122,7 +122,7 @@ Amounts should be positive.
 ## Add new item to a shopping cart - ("/v1/shopping-carts/{id}/items")
 This endpoint returns a list of items after adding the given item to the items list of a shopping cart that id={id}.
 ### Returns
-**"List\<Item\>"** that is updated recently.
+**List\<Item\>** that is updated recently.
 ### Request Type
 POST
 ### Parameters
