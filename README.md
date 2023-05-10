@@ -8,7 +8,7 @@ After creating a shopping cart please store id of shopping cart, because you wil
 This is the base url where you can access it directly from clearnet, http://16.171.2.137:8080/v1/shopping-carts
 
 # Test Driven Development
-The project is written as it can be tested. ShoppingCartServiceTest and ShoppingCartControllerIT are test classes. Mockite is used in this project. Unit tests are written with JUnit and Mockito, Integration tests are written with MockMVC and Mockito. <br>
+The project is written as it can be tested. ShoppingCartServiceTest and ShoppingCartControllerIT are test classes. Mockito is used in this project. Unit tests are written with JUnit and Mockito, Integration tests are written with MockMVC and Mockito. <br>
 
 51 Unit tests are passed. <br>
 - getItemsOfShoppingCartById()
