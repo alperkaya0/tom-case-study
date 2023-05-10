@@ -143,13 +143,13 @@ Item object.
 }
 ```
 ### Responses
-| Code | Description |
-| ----------- | ----------- |
-| 200 | Success |
-| 400 | BadItemException |
-| 400 | BadShoppingCartException |
-| 404 | ShoppingCartNotFoundException |
-| 409 | ItemAlreadyPresent |
+| Code | Description | Text |
+| ----------- | ----------- | ----------- |
+| 200 | Success ||
+| 400 | BadItemException | Item url cannot be empty.<br>Item name cannot be empty.<br>Category name cannot be empty.<br>Price must be a positive number.<br>Quantity must be a positive number.<br> |
+| 400 | BadShoppingCartException | Price must be a positive number. Incorrect shopping cart. |
+| 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
+| 409 | ItemAlreadyPresent | There are multiple items with the same id. Incorrect shopping cart. |
 
 ---
 
@@ -179,12 +179,12 @@ If you are going to use the second stucture then coupon id must be different tha
 ### Important Notes
 Type must be either 'rate' or 'amount'. If you picked 'rate' then amount should be 0 and rate should be between 0 and 1. If you picked 'amount' then rate should be 0 and amount should be positive. Id must be different than other coupons' id at the specific shopping cart.
 ### Responses
-| Code | Description |
-| ----------- | ----------- |
-| 201 | Created |
-| 400 | BadCouponException |
-| 404 | ShoppingCartNotFoundException |
-| 409 | CouponAlreadyPresentsException |
+| Code | Description | Text |
+| ----------- | ----------- | ----------- |
+| 201 | Created ||
+| 400 | BadCouponException | Type of a coupon cannot be neither empty nor null.<br>Type of a coupon must be either 'rate' or 'amount'.<br>Rate of a coupon of type rate, must be a positive value between 0 and 1.<br>Amount of a coupon of type amount, must be a positive value.<br>Amount of, a coupon of type rate must be zero.<br>Rate of, a coupon of type amount must be zero. |
+| 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
+| 409 | CouponAlreadyPresentException | There are multiple coupons with the same id. Incorrect shopping cart. |
 
 ## Delete an item - ("/v1/shopping-carts/{id}/items/{itemId}")
 This endpoint deletes an item from a shopping cart. And returns nothing.
@@ -198,8 +198,8 @@ PathVariable: String itemId
 ### Request Body
 No body.
 ### Responses
-| Code | Description |
-| ----------- | ----------- |
-| 201 | Created |
-| 404 | ShoppingCartNotFoundException |
-| 404 | ItemNotFoundException |
+| Code | Description | Text |
+| ----------- | ----------- | ----------- |
+| 201 | Created ||
+| 404 | ShoppingCartNotFoundException | There is no ShoppingCart with that id. |
+| 404 | ItemNotFoundException | "There is no Item with that id." |
