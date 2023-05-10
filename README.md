@@ -7,7 +7,7 @@
 ## Get all shopping carts - ("/v1/shopping-carts")
 This endpoint returns list of every shopping carts.
 ### Returns
-**List<ShoppingCart>**.
+List<ShoppingCart>.
 ### Request Type
 GET
 ### Parameters
@@ -24,7 +24,7 @@ No body.
 ## Get a shopping cart by id - ("/v1/shopping-carts/{id}")
 This endpoint returns a ShoppingCart object that id={id}.
 ### Returns
-**ShoppingCart object**.
+ShoppingCart object.
 ### Request Type
 GET
 ### Parameters
@@ -42,7 +42,7 @@ No body.
 ## Get items in a shopping cart - ("/v1/shopping-carts/{id}/items")
 This endpoint returns a list of Items in a shopping cart that id={id}.
 ### Returns
-**List<Item>**.
+List<Item>.
 ### Request Type
 GET
 ### Parameters
@@ -122,7 +122,7 @@ Amounts should be positive.
 ## Add new item to a shopping cart - ("/v1/shopping-carts/{id}/items")
 This endpoint returns a list of items after adding the given item to the items list of a shopping cart that id={id}.
 ### Returns
-**List<Item>** that is updated recently.
+**"List<Item>"** that is updated recently.
 ### Request Type
 POST
 ### Parameters
