@@ -6,7 +6,7 @@ After creating a shopping cart please store id of shopping cart, because you wil
 
 # How to Use
 This is the base url where you can access it directly from clearnet, http://16.171.2.137:8080/v1/shopping-carts <br>
-And this is the dockerized version of it with Amazon Linux 2, http://13.53.130.220:8080/v1/shopping-carts <br>
+And this is the dockerized version of it with Amazon Linux 2, http://13.53.130.220:8080/v1/shopping-carts **This link is always up** <br>
 If you locally downloaded the project, please do **clean install** with **maven** first, then do **docker-compose up**
 
 # Test Driven Development
