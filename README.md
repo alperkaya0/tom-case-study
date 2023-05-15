@@ -1,7 +1,7 @@
 # Shopping Cart API
 This API is a case study for T.O.M. company. <br>I have used combinations of different design patterns in my project: modified MVC with focus on controller and model layers, Repository Pattern, Service Pattern, Exception Handling Pattern. Since my API doesn't need any user interface, I didn't need to write any views. <br>S.O.L.I.D. principles were always top priority at development stage, no layer does the job of any other layer, no function deals with anything more than it needs to deal. <br>Following are the technologies I have used in this project: Java 17, Maven, Spring, SpringBoot, Spring Initializr, Spring Boot Actuator, Docker, Postman, MongoDB, JUnit, Mockito, TomCat, MockMVC, AWS, EC2, JMeter, Prometheus, Grafana. <br>Both code comments and API explanation are ready as a documentation.
 
-# Important Note for FrontEnd Developers
+# Important Note for Front End Developers
 After creating a shopping cart please store id of shopping cart, because you will need it for nearly every request.
 
 # How to Use
