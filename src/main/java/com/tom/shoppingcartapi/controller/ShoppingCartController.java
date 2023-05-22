@@ -29,8 +29,8 @@ import com.tom.shoppingcartapi.service.ShoppingCartService;
 
 import lombok.AllArgsConstructor;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/v1/shopping-carts")
 @AllArgsConstructor
 public class ShoppingCartController {
