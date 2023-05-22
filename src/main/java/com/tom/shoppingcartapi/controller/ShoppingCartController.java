@@ -30,6 +30,7 @@ import com.tom.shoppingcartapi.service.ShoppingCartService;
 import lombok.AllArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/v1/shopping-carts")
 @AllArgsConstructor
 public class ShoppingCartController {
