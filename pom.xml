@@ -44,7 +44,9 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+	<mvc:cors>
+		<mvc:mapping path="/**" />
+	</mvc:cors>
 	<build>
 		<plugins>
 			<plugin>
